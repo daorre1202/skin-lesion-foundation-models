@@ -6,28 +6,34 @@ import tokenize
 from scripts.ce1_common import ROOT
 
 NOTEBOOK = ROOT / "notebooks" / "ce1_pipeline.ipynb"
-# SHA-256 of the code tokens (comments and layout ignored) of the notebook as it was executed.
-CODE_HASH = "bafa42bc09acc427"
+# SHA-256 of the code of the notebook as it was executed, without comments, trailing spaces
+# and blank lines. Only comment tokens are read from the tokenizer, so the value does not
+# depend on the Python version.
+CODE_HASH = "52e3a4183dbaca707f4333b6ea00091a3554dbd21e49d17922c4fa2a1e1c3fbb"
 
 
-def code_hash(nb):
-    h = hashlib.sha256()
-    skip = (tokenize.COMMENT, tokenize.NL, tokenize.NEWLINE, tokenize.INDENT, tokenize.DEDENT, tokenize.ENDMARKER)
+def code_text(nb):
+    out = []
     for cell in nb["cells"]:
         if cell["cell_type"] != "code":
             continue
-        src = "".join(cell["source"])
-        code = "\n".join("pass" if line.lstrip().startswith(("!", "%")) else line for line in src.splitlines())
-        for tok in tokenize.generate_tokens(io.StringIO(code).readline):
-            if tok.type not in skip:
-                h.update(tok.string.encode())
-                h.update(b"\x00")
-    return h.hexdigest()
+        lines = "".join(cell["source"]).splitlines()
+        probe = ["pass" if line.lstrip().startswith(("!", "%")) else line for line in lines]
+        for tok in tokenize.generate_tokens(io.StringIO("\n".join(probe)).readline):
+            if tok.type == tokenize.COMMENT:
+                row, col = tok.start
+                lines[row - 1] = lines[row - 1][:col]
+        out += [line.rstrip() for line in lines if line.strip()]
+    return "\n".join(out)
 
 
-def test_code_tokens_match_the_executed_notebook():
+def code_hash(nb):
+    return hashlib.sha256(code_text(nb).encode("utf-8")).hexdigest()
+
+
+def test_code_matches_the_executed_notebook():
     nb = json.loads(NOTEBOOK.read_text(encoding="utf-8"))
-    assert code_hash(nb).startswith(CODE_HASH)
+    assert code_hash(nb) == CODE_HASH
 
 
 def test_outputs_are_cleared():
