@@ -1,0 +1,148 @@
+{
+  "run": {
+    "seed": 42,
+    "timestamp": "2026-08-04_05-40-26",
+    "environment": "kaggle",
+    "dataset": "HAM10000 / ISIC 2018 Task 3",
+    "total_images": 11720,
+    "split": {
+      "train": 7030,
+      "val": 2342,
+      "test": 2348
+    },
+    "classes": [
+      "MEL",
+      "NV",
+      "BCC",
+      "AKIEC",
+      "BKL",
+      "DF",
+      "VASC"
+    ]
+  },
+  "config": {
+    "tta_rounds": 10,
+    "max_epochs": 35,
+    "focal_gamma": {
+      "resnet50": 1.0,
+      "densenet121": 1.0,
+      "efficientnet_b3": 0.0,
+      "vit_b16": 1.0,
+      "dinov2_b": 0.0,
+      "biomedclip": 1.0
+    },
+    "batch_size": {
+      "resnet50": 32,
+      "densenet121": 32,
+      "efficientnet_b3": 8,
+      "vit_b16": 16,
+      "dinov2_b": 16,
+      "biomedclip": 16
+    },
+    "lr": {
+      "resnet50": 0.0001,
+      "densenet121": 5e-05,
+      "efficientnet_b3": 5e-05,
+      "vit_b16": 1e-05,
+      "dinov2_b": 1e-05,
+      "biomedclip": 1e-05
+    },
+    "es_patience": {
+      "resnet50": 10,
+      "densenet121": 10,
+      "efficientnet_b3": 10,
+      "vit_b16": 10,
+      "dinov2_b": 10,
+      "biomedclip": 10
+    }
+  },
+  "models": {
+    "resnet50": {
+      "val_bacc": 0.7977,
+      "test_bacc": 0.7881,
+      "best_epoch": 34,
+      "total_epochs": 35,
+      "time_min": 58.1
+    },
+    "densenet121": {
+      "val_bacc": 0.7952,
+      "test_bacc": 0.7862,
+      "best_epoch": 30,
+      "total_epochs": 35,
+      "time_min": 51.0
+    },
+    "efficientnet_b3": {
+      "val_bacc": 0.7975,
+      "test_bacc": 0.794,
+      "best_epoch": 11,
+      "total_epochs": 21,
+      "time_min": 58.0
+    },
+    "vit_b16": {
+      "val_bacc": 0.8259,
+      "test_bacc": 0.8009,
+      "best_epoch": 8,
+      "total_epochs": 18,
+      "time_min": 87.6
+    },
+    "dinov2_b": {
+      "val_bacc": 0.8013,
+      "test_bacc": 0.795,
+      "best_epoch": 25,
+      "total_epochs": 35,
+      "time_min": 193.3
+    },
+    "biomedclip": {
+      "val_bacc": 0.7949,
+      "test_bacc": 0.7882,
+      "best_epoch": 31,
+      "total_epochs": 35,
+      "time_min": 170.7
+    }
+  },
+  "ensemble": {
+    "test_bacc": 0.8371
+  },
+  "tta_ensemble": {
+    "rounds": 10,
+    "test_bacc": 0.8415
+  },
+  "clinical": {
+    "thresholds": {
+      "MEL": 0.307,
+      "AKIEC": 0.3862
+    },
+    "test_bacc": 0.8499,
+    "bacc_malignant": 0.825,
+    "per_class": {
+      "MEL": {
+        "sensitivity": 0.8276,
+        "specificity": 0.9492
+      },
+      "NV": {
+        "sensitivity": 0.9251,
+        "specificity": 0.9225
+      },
+      "BCC": {
+        "sensitivity": 0.92,
+        "specificity": 0.9879
+      },
+      "AKIEC": {
+        "sensitivity": 0.7273,
+        "specificity": 0.9934
+      },
+      "BKL": {
+        "sensitivity": 0.7993,
+        "specificity": 0.9822
+      },
+      "DF": {
+        "sensitivity": 0.75,
+        "specificity": 0.9983
+      },
+      "VASC": {
+        "sensitivity": 1.0,
+        "specificity": 0.9987
+      }
+    }
+  }
+}

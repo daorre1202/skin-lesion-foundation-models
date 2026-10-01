@@ -1,0 +1,7 @@
+Modelo,Val_sin_TTA,Val_con_TTA,Usa_TTA
+resnet50,0.7977,0.7819,False
+densenet121,0.7952,0.7808,False
+efficientnet_b3,0.7975,0.7954,False
+vit_b16,0.8259,0.8089,False
+dinov2_b,0.8013,0.8282,True
+biomedclip,0.7949,0.7728,False

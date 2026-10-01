@@ -1,0 +1,7 @@
+Modelo,Test BACC,Test BACC + TTA,Ganancia TTA
+resnet50,0.7881,0.7934,0.0053
+densenet121,0.7862,0.7902,0.004
+efficientnet_b3,0.794,0.7865,-0.0075
+vit_b16,0.8009,0.8011,0.0002
+dinov2_b,0.795,0.8187,0.0236
+biomedclip,0.7882,0.7802,-0.0081

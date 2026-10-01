@@ -1,0 +1,14 @@
+Output stored in the configuration cell of the notebook (first training session, 31 July 2026, Kaggle).
+Original text, in Spanish. The line to read is NUM_WORKERS.
+
+============================================================
+  Entorno           : KAGGLE
+  SOURCE_DIR        : /kaggle/input/datasets/danielortizrequena/isic2018-task3/ISIC2018_Task3/ISIC2018
+  CSV_DIR           : /kaggle/input/datasets/danielortizrequena/isic2018-task3/ISIC2018_Task3/Groundtruth
+  PREP_DIR          : /kaggle/working/isic2018_task3_prepared
+  OUTPUTS_ROOT      : /kaggle/working/OUTPUTS
+  NUM_WORKERS       : 2
+  BS EfficientNet-B3: 8
+============================================================
+  OK  SOURCE_DIR: /kaggle/input/datasets/danielortizrequena/isic2018-task3/ISIC2018_Task3/ISIC2018
+  OK  CSV_DIR: /kaggle/input/datasets/danielortizrequena/isic2018-task3/ISIC2018_Task3/Groundtruth

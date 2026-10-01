@@ -1,0 +1,64 @@
+Modelos,N,Val_BACC
+"resnet50, vit_b16, dinov2_b",3,0.8613
+"vit_b16, dinov2_b, biomedclip",3,0.8589
+"resnet50, densenet121, vit_b16, dinov2_b",4,0.8579
+"resnet50, densenet121, vit_b16, dinov2_b, biomedclip",5,0.8554
+"resnet50, densenet121, efficientnet_b3, vit_b16, dinov2_b, biomedclip",6,0.8552
+"resnet50, efficientnet_b3, vit_b16, dinov2_b",4,0.8519
+"densenet121, vit_b16, dinov2_b",3,0.8509
+"resnet50, vit_b16, dinov2_b, biomedclip",4,0.8505
+"densenet121, vit_b16, dinov2_b, biomedclip",4,0.8503
+"efficientnet_b3, vit_b16, dinov2_b, biomedclip",4,0.8496
+"resnet50, densenet121, efficientnet_b3, vit_b16, dinov2_b",5,0.8486
+"resnet50, densenet121, vit_b16",3,0.8481
+"vit_b16, dinov2_b",2,0.8479
+"resnet50, vit_b16",2,0.8468
+"resnet50, vit_b16, biomedclip",3,0.8466
+"efficientnet_b3, vit_b16, biomedclip",3,0.8463
+"resnet50, efficientnet_b3, vit_b16, dinov2_b, biomedclip",5,0.8454
+"densenet121, efficientnet_b3, vit_b16, dinov2_b",4,0.8453
+"densenet121, efficientnet_b3, vit_b16, dinov2_b, biomedclip",5,0.8449
+"resnet50, efficientnet_b3, vit_b16, biomedclip",4,0.8425
+"resnet50, densenet121, dinov2_b",3,0.8415
+"densenet121, efficientnet_b3, vit_b16",3,0.8412
+"efficientnet_b3, vit_b16, dinov2_b",3,0.8409
+"densenet121, dinov2_b, biomedclip",3,0.8407
+"resnet50, efficientnet_b3, vit_b16",3,0.8407
+"vit_b16, biomedclip",2,0.8395
+"densenet121, efficientnet_b3, vit_b16, biomedclip",4,0.8389
+"densenet121, vit_b16, biomedclip",3,0.8384
+"resnet50, densenet121, efficientnet_b3, vit_b16, biomedclip",5,0.8376
+"resnet50, densenet121, efficientnet_b3, vit_b16",4,0.8375
+"resnet50, dinov2_b",2,0.8372
+"efficientnet_b3, dinov2_b, biomedclip",3,0.8367
+"resnet50, dinov2_b, biomedclip",3,0.8348
+"densenet121, efficientnet_b3, dinov2_b, biomedclip",4,0.8347
+"densenet121, vit_b16",2,0.8346
+"resnet50, densenet121, vit_b16, biomedclip",4,0.8325
+"densenet121, efficientnet_b3, dinov2_b",3,0.8322
+"resnet50, efficientnet_b3, dinov2_b",3,0.8316
+"efficientnet_b3, vit_b16",2,0.8303
+"resnet50, densenet121, efficientnet_b3, dinov2_b",4,0.8286
+dinov2_b,1,0.8282
+"resnet50, densenet121, efficientnet_b3, dinov2_b, biomedclip",5,0.8268
+vit_b16,1,0.8259
+"resnet50, efficientnet_b3, dinov2_b, biomedclip",4,0.8259
+"resnet50, densenet121, dinov2_b, biomedclip",4,0.8256
+"dinov2_b, biomedclip",2,0.825
+"efficientnet_b3, dinov2_b",2,0.8246
+"resnet50, efficientnet_b3, biomedclip",3,0.821
+"densenet121, dinov2_b",2,0.8203
+"resnet50, densenet121, efficientnet_b3",3,0.8184
+"efficientnet_b3, biomedclip",2,0.8156
+"resnet50, densenet121, efficientnet_b3, biomedclip",4,0.8153
+"resnet50, densenet121",2,0.8145
+"densenet121, efficientnet_b3",2,0.8132
+"resnet50, efficientnet_b3",2,0.8106
+"resnet50, densenet121, biomedclip",3,0.8103
+"resnet50, biomedclip",2,0.8102
+"densenet121, efficientnet_b3, biomedclip",3,0.8099
+"densenet121, biomedclip",2,0.8022
+resnet50,1,0.7977
+efficientnet_b3,1,0.7975
+densenet121,1,0.7952
+biomedclip,1,0.7949

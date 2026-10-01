@@ -1,0 +1,173 @@
+
+============================================================
+  CONFIGURACIÓN DE ESTA EJECUCIÓN
+============================================================
+  Dataset:       100% (1.0)
+  Split:         Train 60% / Val 20% / Test 20%
+  Max epochs:    35  |  ES patience: resnet50=10 densenet121=10 efficientnet_b3=10
+  ES min delta:  resnet50=0.001 | densenet121=0.0005 | efficientnet_b3=0.001
+  TTA rondas:    10
+  Semilla:       RNG_SEED = 42
+  Modelos:
+    resnet50: lr=0.0001 wd=0.0001 w=0.85 p=10 δ=0.001 sched=4 224px bs=32
+    densenet121: lr=5e-05 wd=5e-05 w=0.85 p=10 δ=0.0005 sched=5 224px bs=32
+    efficientnet_b3: lr=5e-05 wd=5e-05 w=0.92 p=10 δ=0.001 sched=4 300px bs=8
+    vit_b16: lr=1e-05 wd=1e-05 w=0.9 p=10 δ=0.0005 sched=4 224px bs=16
+    dinov2_b: lr=1e-05 wd=1e-05 w=0.9 p=10 δ=0.0005 sched=4 224px bs=16
+    biomedclip: lr=1e-05 wd=1e-05 w=0.9 p=10 δ=0.0005 sched=4 224px bs=16
+  Loss: FocalLoss per-model (resnet50 γ=1.0, densenet121 γ=1.0, efficientnet_b3 γ=0.0, vit_b16 γ=1.0, dinov2_b γ=0.0, biomedclip γ=1.0)
+  Aug boost clínico: {'MEL': 'min nivel 2'}
+  Umbrales clínicos:
+    MEL: sens>=0.85 spec>=0.85 [argmax-θ]
+    AKIEC: sens>=0.75 spec>=0.7 [argmax-θ]
+  Modo:          REANUDAR (nueva carpeta _r) — checkpoints de: /kaggle/working/OUTPUTS/resultados6modelos
+  Carpeta:       /kaggle/working/OUTPUTS/2026-08-04_05-40-26_r
+============================================================
+
+✓ Ground truth cargado: 11720 imágenes
+✓ Cargando split desde split_assignment.json (mismos sets que run original)
+✓ Split cargado desde archivo — Train: 7030 | Val: 2342 | Test: 2348
+✓ Clases usadas: ['MEL', 'NV', 'BCC', 'AKIEC', 'BKL', 'DF', 'VASC']
+✓ Imágenes copiadas a estructura de carpetas
+
+===== DISTRIBUCIÓN DEL DATASET =====
+  MEL      Melanoma                                           Train:   783 | Val:  261 | Test:   261
+  NV       Melanocytic Nevus                                  Train:  4642 | Val: 1547 | Test:  1548
+  BCC      Basal Cell Carcinoma                               Train:   373 | Val:  124 | Test:   125
+  AKIEC    Actinic Keratoses / Intraepithelial Carcinoma      Train:   226 | Val:   75 | Test:    77
+  BKL      Benign Keratosis-like Lesions                      Train:   802 | Val:  267 | Test:   269
+  DF       Dermatofibroma                                     Train:    96 | Val:   32 | Test:    32
+  VASC     Vascular Lesions                                   Train:   108 | Val:   36 | Test:    36
+
+============================================================
+  Cargando checkpoint: resnet50
+============================================================
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to /root/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
+  ✓ resnet50 — Val BACC: 0.7977 | Epoch: 34 | Tiempo original: 58m 4s
+  — Test BACC (meta.json original): 0.7881
+
+============================================================
+  Cargando checkpoint: densenet121
+============================================================
+Downloading: "https://download.pytorch.org/models/densenet121-a639ec97.pth" to /root/.cache/torch/hub/checkpoints/densenet121-a639ec97.pth
+  ✓ densenet121 — Val BACC: 0.7952 | Epoch: 30 | Tiempo original: 51m 0s
+  — Test BACC (meta.json original): 0.7862
+
+============================================================
+  Cargando checkpoint: efficientnet_b3
+============================================================
+Downloading: "https://download.pytorch.org/models/efficientnet_b3_rwightman-b3899882.pth" to /root/.cache/torch/hub/checkpoints/efficientnet_b3_rwightman-b3899882.pth
+  ✓ efficientnet_b3 — Val BACC: 0.7975 | Epoch: 11 | Tiempo original: 57m 57s
+  — Test BACC (meta.json original): 0.7940
+
+============================================================
+  Cargando checkpoint: vit_b16
+============================================================
+  ✓ vit_b16 — Val BACC: 0.8259 | Epoch: 8 | Tiempo original: 87m 35s
+  — Test BACC (meta.json original): 0.8009
+
+============================================================
+  Cargando checkpoint: dinov2_b
+============================================================
+  ✓ dinov2_b — Val BACC: 0.8013 | Epoch: 25 | Tiempo original: 193m 17s
+  — Test BACC (meta.json original): 0.7950
+
+============================================================
+  Cargando checkpoint: biomedclip
+============================================================
+  ✓ biomedclip — Val BACC: 0.7949 | Epoch: 31 | Tiempo original: 170m 43s
+  — Test BACC (meta.json original): 0.7882
+
+===== ENSEMBLE PONDERADO (test) =====
+  Pesos (proporcionales a Val BACC):
+    resnet50              Val BACC: 0.7977  — peso: 0.1658 (16.6%)
+    densenet121           Val BACC: 0.7952  — peso: 0.1652 (16.5%)
+    efficientnet_b3       Val BACC: 0.7975  — peso: 0.1657 (16.6%)
+    vit_b16               Val BACC: 0.8259  — peso: 0.1716 (17.2%)
+    dinov2_b              Val BACC: 0.8013  — peso: 0.1665 (16.7%)
+    biomedclip            Val BACC: 0.7949  — peso: 0.1652 (16.5%)
+✓ Ensemble Test BACC: 0.8371
+
+✓ Mejor modelo individual: vit_b16 (Val BACC=0.8259)
+
+===== TEST-TIME AUGMENTATION (test) =====
+  TTA individual (vit_b16, 10 rondas)...
+✓ TTA vit_b16 Test BACC (10 rondas): 0.8011
+
+  TTA ensemble (6 modelos × 10 rondas)...
+    Ensemble CNN (3 originales)        : BACC = 0.8283  (resnet50, densenet121, efficientnet_b3)
+    Ensemble Fundacionales (3 nuevos)  : BACC = 0.8370  (vit_b16, dinov2_b, biomedclip)
+    Ensemble Todos                     : BACC = 0.8415  (resnet50, densenet121, efficientnet_b3, vit_b16, dinov2_b, biomedclip)
+
+  TTA individual por modelo:
+    resnet50        : sin TTA = 0.7881  con TTA = 0.7934  ganancia = +0.0053
+    densenet121     : sin TTA = 0.7862  con TTA = 0.7902  ganancia = +0.0040
+    efficientnet_b3 : sin TTA = 0.7940  con TTA = 0.7865  ganancia = -0.0075
+    vit_b16         : sin TTA = 0.8009  con TTA = 0.8011  ganancia = +0.0002
+    dinov2_b        : sin TTA = 0.7950  con TTA = 0.8187  ganancia = +0.0236
+    biomedclip      : sin TTA = 0.7882  con TTA = 0.7802  ganancia = -0.0081
+✓ TTA Ensemble Test BACC (10 rondas × 6 modelos): 0.8415
+
+  Comparativa TTA:
+    Ensemble sin TTA:         0.8371
+    TTA vit_b16 solo: 0.8011
+    TTA Ensemble:             0.8415
+    MEL sens (TTA argmax):    0.7241
+
+  TTA ensemble sobre val (10 rondas × 6 modelos)...
+
+  Calculando probabilidades sin TTA (referencia para decidir si TTA ayuda o perjudica a cada modelo)...
+
+  Decisión TTA vs sin-TTA por modelo (sobre validación):
+    resnet50        : Val sin TTA = 0.7977  Val con TTA = 0.7819  → usa SIN TTA
+    densenet121     : Val sin TTA = 0.7952  Val con TTA = 0.7808  → usa SIN TTA
+    efficientnet_b3 : Val sin TTA = 0.7975  Val con TTA = 0.7954  → usa SIN TTA
+    vit_b16         : Val sin TTA = 0.8259  Val con TTA = 0.8089  → usa SIN TTA
+    dinov2_b        : Val sin TTA = 0.8013  Val con TTA = 0.8282  → usa TTA
+    biomedclip      : Val sin TTA = 0.7949  Val con TTA = 0.7728  → usa SIN TTA
+
+  Búsqueda del mejor subconjunto de modelos (63 combinaciones, evaluadas en validación)...
+✓ Mejor subconjunto en validación: ['resnet50', 'vit_b16', 'dinov2_b'] (Val BACC = 0.8613)
+✓ Mejor subconjunto sobre test (confirmación única): BACC = 0.8379
+    Ensemble Mejor subconjunto (val)   : BACC = 0.8379  (resnet50, vit_b16, dinov2_b)
+
+✓ Ensemble OFICIAL adoptado: los 6 modelos — Test BACC = 0.8415
+  (el mejor subconjunto en val, ['resnet50', 'vit_b16', 'dinov2_b'], se reporta solo como análisis exploratorio: Val 0.8613 → Test 0.8379)
+
+===== CALIBRACIÓN DE UMBRALES CLÍNICOS (sobre val) =====
+  MEL: theta=0.307 | sens=0.8506 | spec=0.9303 | metodo=argmax-theta | floor=0.85
+  AKIEC: theta=0.386 | sens=0.7733 | spec=0.9938 | metodo=argmax-theta | floor=0.70
+
+===== COMPARATIVA FINAL (test) =====
+  TTA Ensemble (argmax):            BACC = 0.8415  MEL sens = 0.724  spec = 0.971
+  TTA Ensemble (umbrales clínicos): BACC = 0.8499  [theta_MEL=0.307  theta_AKIEC=0.386]
+  Delta BACC global: +0.0084
+  BACC malignas: Argmax=0.7861 → Umbrales=0.8250 (+0.0388)
+  Métricas por clase con umbrales:
+    MEL     sens=0.8276  spec=0.9492 <-- crítico
+    NV      sens=0.9251  spec=0.9225
+    BCC     sens=0.9200  spec=0.9879
+    AKIEC   sens=0.7273  spec=0.9934 <-- crítico
+    BKL     sens=0.7993  spec=0.9822
+    DF      sens=0.7500  spec=0.9983
+    VASC    sens=1.0000  spec=0.9987
+✓ results.json guardado
+
+---------------------------------------------------------------------------------
+                Modelo  Val BACC  Test BACC  Mejor epoch  Epochs totales   Tiempo
+---------------------------------------------------------------------------------
+              resnet50    0.7977     0.7881           34              35   58m 4s
+           densenet121    0.7952     0.7862           30              35   51m 0s
+       efficientnet_b3    0.7975     0.7940           11              21  57m 57s
+               vit_b16    0.8259     0.8009            8              18  87m 35s
+              dinov2_b    0.8013     0.7950           25              35 193m 17s
+            biomedclip    0.7949     0.7882           31              35 170m 43s
+              Ensemble         -     0.8371            -               -        -
+         TTA (vit_b16)         -     0.8011            -               -        -
+          TTA Ensemble         -     0.8415            -               -        -
+TTA + umbrales clinicos         -     0.8499            -θ_MEL=0.307  θ_AKIEC=0.386        -
+---------------------------------------------------------------------------------
+✓ Arrays guardados en Drive (disponibles para LOAD_TTA_FROM_DIR)
+
+✓ PDF generado: /kaggle/working/OUTPUTS/2026-08-04_05-40-26_r/resultados_tfg.pdf
+✓ Todos los outputs en: /kaggle/working/OUTPUTS/2026-08-04_05-40-26_r

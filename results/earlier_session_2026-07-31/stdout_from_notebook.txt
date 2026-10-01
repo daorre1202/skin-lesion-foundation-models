@@ -1,0 +1,415 @@
+
+============================================================
+  CONFIGURACIÓN DE ESTA EJECUCIÓN
+============================================================
+  Dataset:       100% (1.0)
+  Split:         Train 60% / Val 20% / Test 20%
+  Max epochs:    35  |  ES patience: resnet50=10 densenet121=10 efficientnet_b3=10
+  ES min delta:  resnet50=0.001 | densenet121=0.0005 | efficientnet_b3=0.001
+  TTA rondas:    10
+  Semilla:       RNG_SEED = 42
+  Modelos:
+    resnet50: lr=0.0001 wd=0.0001 w=0.85 p=10 δ=0.001 sched=4 224px bs=32
+    densenet121: lr=5e-05 wd=5e-05 w=0.85 p=10 δ=0.0005 sched=5 224px bs=32
+    efficientnet_b3: lr=5e-05 wd=5e-05 w=0.92 p=10 δ=0.001 sched=4 300px bs=8
+    vit_b16: lr=1e-05 wd=1e-05 w=0.9 p=10 δ=0.0005 sched=4 224px bs=16
+    dinov2_b: lr=1e-05 wd=1e-05 w=0.9 p=10 δ=0.0005 sched=4 224px bs=16
+    biomedclip: lr=1e-05 wd=1e-05 w=0.9 p=10 δ=0.0005 sched=4 224px bs=16
+  Loss: FocalLoss per-model (resnet50 γ=1.0, densenet121 γ=1.0, efficientnet_b3 γ=0.0 [=CE])
+  Aug boost clínico: {'MEL': 'min nivel 2'}
+  Umbrales clínicos:
+    MEL: sens>=0.85 spec>=0.85 [argmax-θ]
+    AKIEC: sens>=0.75 spec>=0.7 [argmax-θ]
+  Modo:          Entrenamiento completo desde cero
+  Carpeta:       /kaggle/working/OUTPUTS/2026-07-31_21-40-20
+============================================================
+
+✓ Ground truth cargado: 11720 imágenes
+ℹ Split estratificado (60/20/20 garantizado por clase)
+✓ Split completado — Train: 7030 | Val: 2342 | Test: 2348
+✓ Split guardado: split_assignment.json
+✓ Clases usadas: ['MEL', 'NV', 'BCC', 'AKIEC', 'BKL', 'DF', 'VASC']
+✓ Imágenes copiadas a estructura de carpetas
+
+===== DISTRIBUCIÓN DEL DATASET =====
+  MEL      Melanoma                                           Train:   783 | Val:  261 | Test:   261
+  NV       Melanocytic Nevus                                  Train:  4642 | Val: 1547 | Test:  1548
+  BCC      Basal Cell Carcinoma                               Train:   373 | Val:  124 | Test:   125
+  AKIEC    Actinic Keratoses / Intraepithelial Carcinoma      Train:   226 | Val:   75 | Test:    77
+  BKL      Benign Keratosis-like Lesions                      Train:   802 | Val:  267 | Test:   269
+  DF       Dermatofibroma                                     Train:    96 | Val:   32 | Test:    32
+  VASC     Vascular Lesions                                   Train:   108 | Val:   36 | Test:    36
+
+============================================================
+  Entrenando: resnet50
+============================================================
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to /root/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
+100%|██████████| 97.8M/97.8M [00:00<00:00, 191MB/s]
+
+  Augmentation graduada (clase mayoritaria: 4642 imgs):
+    NV         4642 imgs  ratio=  1.0  — Nivel 0 (sin augmentation)
+    BKL         802 imgs  ratio=  5.8  — Nivel 1 (leve)
+    MEL         783 imgs  ratio=  5.9  — Nivel 2 (media) ★BOOST CLÍNICO
+    BCC         373 imgs  ratio= 12.4  — Nivel 2 (media)
+    AKIEC       226 imgs  ratio= 20.5  — Nivel 3 (agresiva)
+    VASC        108 imgs  ratio= 43.0  — Nivel 3 (agresiva)
+    DF           96 imgs  ratio= 48.4  — Nivel 3 (agresiva)
+  Resolución: 224px | Batch: 32
+  Epoch   1/35 | Train Loss: 0.5166  BACC: 0.7907 | Val Loss: 0.6659  BACC: 0.6196
+  Epoch   2/35 | Train Loss: 0.3341  BACC: 0.8754 | Val Loss: 0.5663  BACC: 0.6271
+  Epoch   3/35 | Train Loss: 0.2785  BACC: 0.8925 | Val Loss: 0.6722  BACC: 0.6592
+  Epoch   4/35 | Train Loss: 0.2459  BACC: 0.9065 | Val Loss: 0.6183  BACC: 0.6732
+  Epoch   5/35 | Train Loss: 0.2204  BACC: 0.9205 | Val Loss: 0.5170  BACC: 0.6913
+  Epoch   6/35 | Train Loss: 0.2013  BACC: 0.9311 | Val Loss: 0.4764  BACC: 0.7011
+  Epoch   7/35 | Train Loss: 0.1941  BACC: 0.9310 | Val Loss: 0.5153  BACC: 0.6883
+  Epoch   8/35 | Train Loss: 0.1802  BACC: 0.9372 | Val Loss: 0.5374  BACC: 0.7318
+  Epoch   9/35 | Train Loss: 0.1668  BACC: 0.9452 | Val Loss: 0.5189  BACC: 0.7372
+  Epoch  10/35 | Train Loss: 0.1635  BACC: 0.9482 | Val Loss: 0.5057  BACC: 0.7301
+  Epoch  11/35 | Train Loss: 0.1521  BACC: 0.9529 | Val Loss: 0.4511  BACC: 0.7188
+  Epoch  12/35 | Train Loss: 0.1457  BACC: 0.9539 | Val Loss: 0.4515  BACC: 0.7305
+  Epoch  13/35 | Train Loss: 0.1476  BACC: 0.9539 | Val Loss: 0.5108  BACC: 0.7159
+  Epoch  14/35 | Train Loss: 0.1398  BACC: 0.9578 | Val Loss: 0.4749  BACC: 0.7472
+  Epoch  15/35 | Train Loss: 0.1283  BACC: 0.9624 | Val Loss: 0.4586  BACC: 0.7467
+  Epoch  16/35 | Train Loss: 0.1334  BACC: 0.9651 | Val Loss: 0.5110  BACC: 0.7423
+  Epoch  17/35 | Train Loss: 0.1262  BACC: 0.9631 | Val Loss: 0.5101  BACC: 0.7319
+  Epoch  18/35 | Train Loss: 0.1329  BACC: 0.9617 | Val Loss: 0.5308  BACC: 0.7039
+  Epoch  19/35 | Train Loss: 0.1266  BACC: 0.9644 | Val Loss: 0.4685  BACC: 0.7298
+  Epoch  20/35 | Train Loss: 0.1209  BACC: 0.9680 | Val Loss: 0.4648  BACC: 0.7281
+  Epoch  21/35 | Train Loss: 0.0912  BACC: 0.9804 | Val Loss: 0.4216  BACC: 0.7655
+  Epoch  22/35 | Train Loss: 0.0801  BACC: 0.9869 | Val Loss: 0.4572  BACC: 0.7385
+  Epoch  23/35 | Train Loss: 0.0761  BACC: 0.9876 | Val Loss: 0.4063  BACC: 0.7645
+  Epoch  24/35 | Train Loss: 0.0737  BACC: 0.9883 | Val Loss: 0.4070  BACC: 0.7846
+  Epoch  25/35 | Train Loss: 0.0785  BACC: 0.9869 | Val Loss: 0.4141  BACC: 0.7617
+  Epoch  26/35 | Train Loss: 0.0727  BACC: 0.9888 | Val Loss: 0.4147  BACC: 0.7902
+  Epoch  27/35 | Train Loss: 0.0714  BACC: 0.9902 | Val Loss: 0.4251  BACC: 0.7687
+  Epoch  28/35 | Train Loss: 0.0704  BACC: 0.9910 | Val Loss: 0.4228  BACC: 0.7482
+  Epoch  29/35 | Train Loss: 0.0695  BACC: 0.9912 | Val Loss: 0.4577  BACC: 0.7813
+  Epoch  30/35 | Train Loss: 0.0731  BACC: 0.9882 | Val Loss: 0.4388  BACC: 0.7582
+  Epoch  31/35 | Train Loss: 0.0755  BACC: 0.9900 | Val Loss: 0.4302  BACC: 0.7734
+  Epoch  32/35 | Train Loss: 0.0637  BACC: 0.9946 | Val Loss: 0.4371  BACC: 0.7604
+  Epoch  33/35 | Train Loss: 0.0604  BACC: 0.9961 | Val Loss: 0.4238  BACC: 0.7809
+  Epoch  34/35 | Train Loss: 0.0586  BACC: 0.9965 | Val Loss: 0.4087  BACC: 0.7977
+  Epoch  35/35 | Train Loss: 0.0586  BACC: 0.9965 | Val Loss: 0.4125  BACC: 0.7779
+  ✓ Mejor checkpoint — epoch 34 | Val BACC: 0.7977 | Val Loss: 0.4087 | Score=0.7845 | Tiempo: 58m 4s
+  — Test BACC: 0.7881
+  ✓ Guardados: resnet50_best.pth | _meta.json | _history.json
+
+============================================================
+  Entrenando: densenet121
+============================================================
+Downloading: "https://download.pytorch.org/models/densenet121-a639ec97.pth" to /root/.cache/torch/hub/checkpoints/densenet121-a639ec97.pth
+100%|██████████| 30.8M/30.8M [00:00<00:00, 180MB/s]
+
+  Augmentation graduada (clase mayoritaria: 4642 imgs):
+    NV         4642 imgs  ratio=  1.0  — Nivel 0 (sin augmentation)
+    BKL         802 imgs  ratio=  5.8  — Nivel 1 (leve)
+    MEL         783 imgs  ratio=  5.9  — Nivel 2 (media) ★BOOST CLÍNICO
+    BCC         373 imgs  ratio= 12.4  — Nivel 2 (media)
+    AKIEC       226 imgs  ratio= 20.5  — Nivel 3 (agresiva)
+    VASC        108 imgs  ratio= 43.0  — Nivel 3 (agresiva)
+    DF           96 imgs  ratio= 48.4  — Nivel 3 (agresiva)
+  Resolución: 224px | Batch: 32
+  Epoch   1/35 | Train Loss: 0.6854  BACC: 0.7415 | Val Loss: 0.6304  BACC: 0.6750
+  Epoch   2/35 | Train Loss: 0.3448  BACC: 0.8786 | Val Loss: 0.5820  BACC: 0.7230
+  Epoch   3/35 | Train Loss: 0.2650  BACC: 0.9109 | Val Loss: 0.5125  BACC: 0.6766
+  Epoch   4/35 | Train Loss: 0.2287  BACC: 0.9274 | Val Loss: 0.5044  BACC: 0.7537
+  Epoch   5/35 | Train Loss: 0.2067  BACC: 0.9332 | Val Loss: 0.4798  BACC: 0.7389
+  Epoch   6/35 | Train Loss: 0.1756  BACC: 0.9472 | Val Loss: 0.4611  BACC: 0.7484
+  Epoch   7/35 | Train Loss: 0.1715  BACC: 0.9517 | Val Loss: 0.4474  BACC: 0.7289
+  Epoch   8/35 | Train Loss: 0.1456  BACC: 0.9603 | Val Loss: 0.4435  BACC: 0.7026
+  Epoch   9/35 | Train Loss: 0.1336  BACC: 0.9624 | Val Loss: 0.4558  BACC: 0.7545
+  Epoch  10/35 | Train Loss: 0.1302  BACC: 0.9662 | Val Loss: 0.4747  BACC: 0.7478
+  Epoch  11/35 | Train Loss: 0.1216  BACC: 0.9698 | Val Loss: 0.4742  BACC: 0.7647
+  Epoch  12/35 | Train Loss: 0.1180  BACC: 0.9699 | Val Loss: 0.4426  BACC: 0.7703
+  Epoch  13/35 | Train Loss: 0.1037  BACC: 0.9782 | Val Loss: 0.4314  BACC: 0.7432
+  Epoch  14/35 | Train Loss: 0.0979  BACC: 0.9774 | Val Loss: 0.4203  BACC: 0.7758
+  Epoch  15/35 | Train Loss: 0.0992  BACC: 0.9770 | Val Loss: 0.4183  BACC: 0.7387
+  Epoch  16/35 | Train Loss: 0.0925  BACC: 0.9815 | Val Loss: 0.4226  BACC: 0.7588
+  Epoch  17/35 | Train Loss: 0.0911  BACC: 0.9809 | Val Loss: 0.4153  BACC: 0.7592
+  Epoch  18/35 | Train Loss: 0.0893  BACC: 0.9832 | Val Loss: 0.4157  BACC: 0.7682
+  Epoch  19/35 | Train Loss: 0.0807  BACC: 0.9855 | Val Loss: 0.4256  BACC: 0.7548
+  Epoch  20/35 | Train Loss: 0.0815  BACC: 0.9850 | Val Loss: 0.4378  BACC: 0.7449
+  Epoch  21/35 | Train Loss: 0.0749  BACC: 0.9881 | Val Loss: 0.3970  BACC: 0.7443
+  Epoch  22/35 | Train Loss: 0.0698  BACC: 0.9904 | Val Loss: 0.3994  BACC: 0.7705
+  Epoch  23/35 | Train Loss: 0.0635  BACC: 0.9945 | Val Loss: 0.4056  BACC: 0.7829
+  Epoch  24/35 | Train Loss: 0.0644  BACC: 0.9937 | Val Loss: 0.4052  BACC: 0.7733
+  Epoch  25/35 | Train Loss: 0.0620  BACC: 0.9951 | Val Loss: 0.4011  BACC: 0.7778
+  Epoch  26/35 | Train Loss: 0.0648  BACC: 0.9939 | Val Loss: 0.3990  BACC: 0.7478
+  Epoch  27/35 | Train Loss: 0.0634  BACC: 0.9945 | Val Loss: 0.4134  BACC: 0.7616
+  Epoch  28/35 | Train Loss: 0.0631  BACC: 0.9940 | Val Loss: 0.3975  BACC: 0.7647
+  Epoch  29/35 | Train Loss: 0.0581  BACC: 0.9966 | Val Loss: 0.4089  BACC: 0.7763
+  Epoch  30/35 | Train Loss: 0.0603  BACC: 0.9954 | Val Loss: 0.4006  BACC: 0.7952
+  Epoch  31/35 | Train Loss: 0.0576  BACC: 0.9975 | Val Loss: 0.3932  BACC: 0.7940
+  Epoch  32/35 | Train Loss: 0.0567  BACC: 0.9976 | Val Loss: 0.3982  BACC: 0.7937
+  Epoch  33/35 | Train Loss: 0.0582  BACC: 0.9968 | Val Loss: 0.3946  BACC: 0.7730
+  Epoch  34/35 | Train Loss: 0.0543  BACC: 0.9982 | Val Loss: 0.3903  BACC: 0.7873
+  Epoch  35/35 | Train Loss: 0.0581  BACC: 0.9974 | Val Loss: 0.3940  BACC: 0.7783
+  ✓ Mejor checkpoint — epoch 30 | Val BACC: 0.7952 | Val Loss: 0.4006 | Score=0.7830 | Tiempo: 51m 0s
+  — Test BACC: 0.7862
+  ✓ Guardados: densenet121_best.pth | _meta.json | _history.json
+
+============================================================
+  Entrenando: efficientnet_b3
+============================================================
+Downloading: "https://download.pytorch.org/models/efficientnet_b3_rwightman-b3899882.pth" to /root/.cache/torch/hub/checkpoints/efficientnet_b3_rwightman-b3899882.pth
+100%|██████████| 47.2M/47.2M [00:00<00:00, 165MB/s]
+
+  Augmentation graduada (clase mayoritaria: 4642 imgs):
+    NV         4642 imgs  ratio=  1.0  — Nivel 0 (sin augmentation)
+    BKL         802 imgs  ratio=  5.8  — Nivel 1 (leve)
+    MEL         783 imgs  ratio=  5.9  — Nivel 2 (media) ★BOOST CLÍNICO
+    BCC         373 imgs  ratio= 12.4  — Nivel 2 (media)
+    AKIEC       226 imgs  ratio= 20.5  — Nivel 3 (agresiva)
+    VASC        108 imgs  ratio= 43.0  — Nivel 3 (agresiva)
+    DF           96 imgs  ratio= 48.4  — Nivel 3 (agresiva)
+  Resolución: 300px | Batch: 8
+  Epoch   1/35 | Train Loss: 1.2865  BACC: 0.6340 | Val Loss: 0.6444  BACC: 0.6881
+  Epoch   2/35 | Train Loss: 0.9063  BACC: 0.8150 | Val Loss: 0.5624  BACC: 0.7100
+  Epoch   3/35 | Train Loss: 0.8138  BACC: 0.8587 | Val Loss: 0.5302  BACC: 0.7481
+  Epoch   4/35 | Train Loss: 0.7615  BACC: 0.8831 | Val Loss: 0.5285  BACC: 0.7103
+  Epoch   5/35 | Train Loss: 0.7176  BACC: 0.9074 | Val Loss: 0.4880  BACC: 0.7572
+  Epoch   6/35 | Train Loss: 0.6929  BACC: 0.9184 | Val Loss: 0.5793  BACC: 0.7413
+  Epoch   7/35 | Train Loss: 0.6718  BACC: 0.9255 | Val Loss: 0.4871  BACC: 0.7340
+  Epoch   8/35 | Train Loss: 0.6593  BACC: 0.9303 | Val Loss: 0.4492  BACC: 0.7530
+  Epoch   9/35 | Train Loss: 0.6425  BACC: 0.9373 | Val Loss: 0.4608  BACC: 0.7827
+  Epoch  10/35 | Train Loss: 0.6272  BACC: 0.9467 | Val Loss: 0.4598  BACC: 0.7502
+  Epoch  11/35 | Train Loss: 0.6159  BACC: 0.9519 | Val Loss: 0.5154  BACC: 0.7975
+  Epoch  12/35 | Train Loss: 0.6073  BACC: 0.9566 | Val Loss: 0.4773  BACC: 0.7716
+  Epoch  13/35 | Train Loss: 0.6049  BACC: 0.9571 | Val Loss: 0.5078  BACC: 0.7789
+  Epoch  14/35 | Train Loss: 0.5905  BACC: 0.9649 | Val Loss: 0.5028  BACC: 0.7589
+  Epoch  15/35 | Train Loss: 0.5821  BACC: 0.9679 | Val Loss: 0.4701  BACC: 0.7921
+  Epoch  16/35 | Train Loss: 0.5850  BACC: 0.9661 | Val Loss: 0.4803  BACC: 0.7876
+  Epoch  17/35 | Train Loss: 0.5694  BACC: 0.9711 | Val Loss: 0.4653  BACC: 0.7699
+  Epoch  18/35 | Train Loss: 0.5636  BACC: 0.9746 | Val Loss: 0.4630  BACC: 0.7905
+  Epoch  19/35 | Train Loss: 0.5604  BACC: 0.9764 | Val Loss: 0.4770  BACC: 0.7566
+  Epoch  20/35 | Train Loss: 0.5552  BACC: 0.9796 | Val Loss: 0.4652  BACC: 0.7929
+  Epoch  21/35 | Train Loss: 0.5509  BACC: 0.9808 | Val Loss: 0.4854  BACC: 0.7826
+  ⏹ Early stopping — mejor epoch: 11
+  ✓ Mejor checkpoint — epoch 11 | Val BACC: 0.7975 | Val Loss: 0.5154 | Score=0.7865 | Tiempo: 57m 57s
+  — Test BACC: 0.7940
+  ✓ Guardados: efficientnet_b3_best.pth | _meta.json | _history.json
+
+============================================================
+  Entrenando: vit_b16
+============================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+  Augmentation graduada (clase mayoritaria: 4642 imgs):
+    NV         4642 imgs  ratio=  1.0  — Nivel 0 (sin augmentation)
+    BKL         802 imgs  ratio=  5.8  — Nivel 1 (leve)
+    MEL         783 imgs  ratio=  5.9  — Nivel 2 (media) ★BOOST CLÍNICO
+    BCC         373 imgs  ratio= 12.4  — Nivel 2 (media)
+    AKIEC       226 imgs  ratio= 20.5  — Nivel 3 (agresiva)
+    VASC        108 imgs  ratio= 43.0  — Nivel 3 (agresiva)
+    DF           96 imgs  ratio= 48.4  — Nivel 3 (agresiva)
+  Resolución: 224px | Batch: 16
+  Warmup lineal: 3 epochs hasta lr=1e-05
+  (warmup 1/3 — lr=3.33e-06)
+  Epoch   1/35 | Train Loss: 1.1171  BACC: 0.7075 | Val Loss: 0.6019  BACC: 0.6481
+  (warmup 2/3 — lr=6.67e-06)
+  Epoch   2/35 | Train Loss: 0.7715  BACC: 0.8867 | Val Loss: 0.6063  BACC: 0.7267
+  (warmup 3/3 — lr=1.00e-05)
+  Epoch   3/35 | Train Loss: 0.7044  BACC: 0.9167 | Val Loss: 0.5697  BACC: 0.7161
+  Epoch   4/35 | Train Loss: 0.6377  BACC: 0.9452 | Val Loss: 0.5583  BACC: 0.7302
+  Epoch   5/35 | Train Loss: 0.6089  BACC: 0.9541 | Val Loss: 0.4994  BACC: 0.7168
+  Epoch   6/35 | Train Loss: 0.5971  BACC: 0.9589 | Val Loss: 0.5366  BACC: 0.7786
+  Epoch   7/35 | Train Loss: 0.5801  BACC: 0.9662 | Val Loss: 0.5467  BACC: 0.7156
+  Epoch   8/35 | Train Loss: 0.5754  BACC: 0.9675 | Val Loss: 0.4872  BACC: 0.7758
+  Epoch   9/35 | Train Loss: 0.5590  BACC: 0.9740 | Val Loss: 0.4810  BACC: 0.7380
+  Epoch  10/35 | Train Loss: 0.5554  BACC: 0.9780 | Val Loss: 0.4726  BACC: 0.7872
+  Epoch  11/35 | Train Loss: 0.5497  BACC: 0.9795 | Val Loss: 0.4588  BACC: 0.7799
+  Epoch  12/35 | Train Loss: 0.5480  BACC: 0.9806 | Val Loss: 0.5000  BACC: 0.7687
+  Epoch  13/35 | Train Loss: 0.5468  BACC: 0.9810 | Val Loss: 0.4819  BACC: 0.7804
+  Epoch  14/35 | Train Loss: 0.5392  BACC: 0.9854 | Val Loss: 0.4693  BACC: 0.8088
+  Epoch  15/35 | Train Loss: 0.5378  BACC: 0.9858 | Val Loss: 0.4773  BACC: 0.7949
+  Epoch  16/35 | Train Loss: 0.5432  BACC: 0.9840 | Val Loss: 0.6191  BACC: 0.7946
+  Epoch  17/35 | Train Loss: 0.5366  BACC: 0.9859 | Val Loss: 0.5073  BACC: 0.7714
+  Epoch  18/35 | Train Loss: 0.5390  BACC: 0.9851 | Val Loss: 0.4562  BACC: 0.8185
+  Epoch  19/35 | Train Loss: 0.5323  BACC: 0.9872 | Val Loss: 0.5200  BACC: 0.7872
+  Epoch  20/35 | Train Loss: 0.5259  BACC: 0.9912 | Val Loss: 0.5195  BACC: 0.8019
+  Epoch  21/35 | Train Loss: 0.5301  BACC: 0.9897 | Val Loss: 0.5177  BACC: 0.8138
+  Epoch  22/35 | Train Loss: 0.5241  BACC: 0.9922 | Val Loss: 0.5159  BACC: 0.7642
+  Epoch  23/35 | Train Loss: 0.5251  BACC: 0.9916 | Val Loss: 0.4884  BACC: 0.8058
+  Epoch  24/35 | Train Loss: 0.5152  BACC: 0.9957 | Val Loss: 0.4680  BACC: 0.7816
+  Epoch  25/35 | Train Loss: 0.5144  BACC: 0.9954 | Val Loss: 0.4744  BACC: 0.7901
+  Epoch  26/35 | Train Loss: 0.5118  BACC: 0.9969 | Val Loss: 0.4696  BACC: 0.7740
+  Epoch  27/35 | Train Loss: 0.5109  BACC: 0.9974 | Val Loss: 0.4594  BACC: 0.7724
+  Epoch  28/35 | Train Loss: 0.5123  BACC: 0.9969 | Val Loss: 0.4969  BACC: 0.7998
+  ⏹ Early stopping — mejor epoch: 18
+  ✓ Mejor checkpoint — epoch 18 | Val BACC: 0.8185 | Val Loss: 0.4562 | Score=0.8053 | Tiempo: 147m 3s
+  — Test BACC: 0.7955
+  ✓ Guardados: vit_b16_best.pth | _meta.json | _history.json
+
+============================================================
+  Entrenando: dinov2_b
+============================================================
+
+  Augmentation graduada (clase mayoritaria: 4642 imgs):
+    NV         4642 imgs  ratio=  1.0  — Nivel 0 (sin augmentation)
+    BKL         802 imgs  ratio=  5.8  — Nivel 1 (leve)
+    MEL         783 imgs  ratio=  5.9  — Nivel 2 (media) ★BOOST CLÍNICO
+    BCC         373 imgs  ratio= 12.4  — Nivel 2 (media)
+    AKIEC       226 imgs  ratio= 20.5  — Nivel 3 (agresiva)
+    VASC        108 imgs  ratio= 43.0  — Nivel 3 (agresiva)
+    DF           96 imgs  ratio= 48.4  — Nivel 3 (agresiva)
+  Resolución: 224px | Batch: 16
+  LP-FT: 10 epochs solo cabeza (lr=0.001) → backbone (lr=1e-06)
+  Epoch   1/35 | Train Loss: 1.1699  BACC: 0.6776 | Val Loss: 0.7789  BACC: 0.5626
+  Epoch   2/35 | Train Loss: 0.9862  BACC: 0.7839 | Val Loss: 0.7605  BACC: 0.5243
+  Epoch   3/35 | Train Loss: 0.9404  BACC: 0.8078 | Val Loss: 0.8517  BACC: 0.5925
+  Epoch   4/35 | Train Loss: 0.9312  BACC: 0.8184 | Val Loss: 0.8292  BACC: 0.6329
+  Epoch   5/35 | Train Loss: 0.9096  BACC: 0.8318 | Val Loss: 0.7871  BACC: 0.5927
+  Epoch   6/35 | Train Loss: 0.8976  BACC: 0.8394 | Val Loss: 0.6295  BACC: 0.5537
+  Epoch   7/35 | Train Loss: 0.8812  BACC: 0.8429 | Val Loss: 0.6616  BACC: 0.5869
+  Epoch   8/35 | Train Loss: 0.8819  BACC: 0.8437 | Val Loss: 0.7858  BACC: 0.6461
+  Epoch   9/35 | Train Loss: 0.8771  BACC: 0.8476 | Val Loss: 0.6517  BACC: 0.5837
+  Epoch  10/35 | Train Loss: 0.8757  BACC: 0.8481 | Val Loss: 0.7312  BACC: 0.5517
+  ↑ Backbone descongelado en epoch 11 (lr=1e-06)
+  Epoch  11/35 | Train Loss: 0.7989  BACC: 0.8876 | Val Loss: 0.5839  BACC: 0.6855
+  Epoch  12/35 | Train Loss: 0.7309  BACC: 0.9277 | Val Loss: 0.5162  BACC: 0.6988
+  Epoch  13/35 | Train Loss: 0.6912  BACC: 0.9443 | Val Loss: 0.5214  BACC: 0.7222
+  Epoch  14/35 | Train Loss: 0.6653  BACC: 0.9587 | Val Loss: 0.4920  BACC: 0.7463
+  Epoch  15/35 | Train Loss: 0.6452  BACC: 0.9650 | Val Loss: 0.4675  BACC: 0.7243
+  Epoch  16/35 | Train Loss: 0.6262  BACC: 0.9741 | Val Loss: 0.4397  BACC: 0.7565
+  Epoch  17/35 | Train Loss: 0.6134  BACC: 0.9767 | Val Loss: 0.4563  BACC: 0.7420
+  Epoch  18/35 | Train Loss: 0.6023  BACC: 0.9816 | Val Loss: 0.4632  BACC: 0.7982
+  Epoch  19/35 | Train Loss: 0.5944  BACC: 0.9818 | Val Loss: 0.4737  BACC: 0.7906
+  Epoch  20/35 | Train Loss: 0.5842  BACC: 0.9859 | Val Loss: 0.4548  BACC: 0.7676
+  Epoch  21/35 | Train Loss: 0.5794  BACC: 0.9881 | Val Loss: 0.4308  BACC: 0.7524
+  Epoch  22/35 | Train Loss: 0.5728  BACC: 0.9883 | Val Loss: 0.4318  BACC: 0.7587
+  Epoch  23/35 | Train Loss: 0.5645  BACC: 0.9911 | Val Loss: 0.4424  BACC: 0.7932
+  Epoch  24/35 | Train Loss: 0.5550  BACC: 0.9933 | Val Loss: 0.4130  BACC: 0.7844
+  Epoch  25/35 | Train Loss: 0.5496  BACC: 0.9946 | Val Loss: 0.4109  BACC: 0.8013
+  Epoch  26/35 | Train Loss: 0.5473  BACC: 0.9955 | Val Loss: 0.3973  BACC: 0.7653
+  Epoch  27/35 | Train Loss: 0.5459  BACC: 0.9942 | Val Loss: 0.4088  BACC: 0.7996
+  Epoch  28/35 | Train Loss: 0.5441  BACC: 0.9953 | Val Loss: 0.4087  BACC: 0.7754
+  Epoch  29/35 | Train Loss: 0.5430  BACC: 0.9954 | Val Loss: 0.4196  BACC: 0.7973
+  Epoch  30/35 | Train Loss: 0.5418  BACC: 0.9954 | Val Loss: 0.4069  BACC: 0.7824
+  Epoch  31/35 | Train Loss: 0.5363  BACC: 0.9965 | Val Loss: 0.4152  BACC: 0.7932
+  Epoch  32/35 | Train Loss: 0.5348  BACC: 0.9977 | Val Loss: 0.4144  BACC: 0.7974
+  Epoch  33/35 | Train Loss: 0.5336  BACC: 0.9979 | Val Loss: 0.4152  BACC: 0.7861
+  Epoch  34/35 | Train Loss: 0.5328  BACC: 0.9972 | Val Loss: 0.4135  BACC: 0.7874
+  Epoch  35/35 | Train Loss: 0.5328  BACC: 0.9975 | Val Loss: 0.4118  BACC: 0.7899
+  ⏹ Early stopping — mejor epoch: 25
+  ✓ Mejor checkpoint — epoch 25 | Val BACC: 0.8013 | Val Loss: 0.4109 | Score=0.7920 | Tiempo: 193m 17s
+  — Test BACC: 0.7950
+  ✓ Guardados: dinov2_b_best.pth | _meta.json | _history.json
+
+============================================================
+  Entrenando: biomedclip
+============================================================
+
+  Augmentation graduada (clase mayoritaria: 4642 imgs):
+    NV         4642 imgs  ratio=  1.0  — Nivel 0 (sin augmentation)
+    BKL         802 imgs  ratio=  5.8  — Nivel 1 (leve)
+    MEL         783 imgs  ratio=  5.9  — Nivel 2 (media) ★BOOST CLÍNICO
+    BCC         373 imgs  ratio= 12.4  — Nivel 2 (media)
+    AKIEC       226 imgs  ratio= 20.5  — Nivel 3 (agresiva)
+    VASC        108 imgs  ratio= 43.0  — Nivel 3 (agresiva)
+    DF           96 imgs  ratio= 48.4  — Nivel 3 (agresiva)
+  Resolución: 224px | Batch: 16
+  Warmup lineal: 3 epochs hasta lr=1e-05
+  (warmup 1/3 — lr=3.33e-06)
+  Epoch   1/35 | Train Loss: 1.1668  BACC: 0.6860 | Val Loss: 0.7116  BACC: 0.5796
+  (warmup 2/3 — lr=6.67e-06)
+  Epoch   2/35 | Train Loss: 0.8523  BACC: 0.8445 | Val Loss: 0.5929  BACC: 0.6685
+  (warmup 3/3 — lr=1.00e-05)
+  Epoch   3/35 | Train Loss: 0.7592  BACC: 0.8906 | Val Loss: 0.5510  BACC: 0.6675
+  Epoch   4/35 | Train Loss: 0.6954  BACC: 0.9245 | Val Loss: 0.5178  BACC: 0.6762
+  Epoch   5/35 | Train Loss: 0.6548  BACC: 0.9442 | Val Loss: 0.5047  BACC: 0.7179
+  Epoch   6/35 | Train Loss: 0.6267  BACC: 0.9547 | Val Loss: 0.4920  BACC: 0.6978
+  Epoch   7/35 | Train Loss: 0.6056  BACC: 0.9628 | Val Loss: 0.5464  BACC: 0.7116
+  Epoch   8/35 | Train Loss: 0.5906  BACC: 0.9697 | Val Loss: 0.5503  BACC: 0.6782
+  Epoch   9/35 | Train Loss: 0.5723  BACC: 0.9772 | Val Loss: 0.5351  BACC: 0.7385
+  Epoch  10/35 | Train Loss: 0.5687  BACC: 0.9783 | Val Loss: 0.4792  BACC: 0.7553
+  Epoch  11/35 | Train Loss: 0.5554  BACC: 0.9830 | Val Loss: 0.5148  BACC: 0.7151
+  Epoch  12/35 | Train Loss: 0.5465  BACC: 0.9861 | Val Loss: 0.4966  BACC: 0.7445
+  Epoch  13/35 | Train Loss: 0.5485  BACC: 0.9844 | Val Loss: 0.5134  BACC: 0.7457
+  Epoch  14/35 | Train Loss: 0.5431  BACC: 0.9859 | Val Loss: 0.4942  BACC: 0.7416
+  Epoch  15/35 | Train Loss: 0.5403  BACC: 0.9856 | Val Loss: 0.4957  BACC: 0.7734
+  Epoch  16/35 | Train Loss: 0.5345  BACC: 0.9871 | Val Loss: 0.5300  BACC: 0.7213
+  Epoch  17/35 | Train Loss: 0.5353  BACC: 0.9867 | Val Loss: 0.5130  BACC: 0.7297
+  Epoch  18/35 | Train Loss: 0.5318  BACC: 0.9885 | Val Loss: 0.5893  BACC: 0.7117
+  Epoch  19/35 | Train Loss: 0.5293  BACC: 0.9898 | Val Loss: 0.5363  BACC: 0.7341
+  Epoch  20/35 | Train Loss: 0.5313  BACC: 0.9881 | Val Loss: 0.4823  BACC: 0.7643
+  Epoch  21/35 | Train Loss: 0.5174  BACC: 0.9944 | Val Loss: 0.5003  BACC: 0.7292
+  Epoch  22/35 | Train Loss: 0.5147  BACC: 0.9954 | Val Loss: 0.5542  BACC: 0.7620
+  Epoch  23/35 | Train Loss: 0.5152  BACC: 0.9955 | Val Loss: 0.5140  BACC: 0.7507
+  Epoch  24/35 | Train Loss: 0.5164  BACC: 0.9944 | Val Loss: 0.4930  BACC: 0.7546
+  Epoch  25/35 | Train Loss: 0.5140  BACC: 0.9958 | Val Loss: 0.5066  BACC: 0.7266
+  ⏹ Early stopping — mejor epoch: 15
+  ✓ Mejor checkpoint — epoch 15 | Val BACC: 0.7734 | Val Loss: 0.4957 | Score=0.7629 | Tiempo: 131m 27s
+  — Test BACC: 0.7439
+  ✓ Guardados: biomedclip_best.pth | _meta.json | _history.json
+
+===== ENSEMBLE PONDERADO (test) =====
+  Pesos (proporcionales a Val BACC):
+    resnet50              Val BACC: 0.7977  — peso: 0.1668 (16.7%)
+    densenet121           Val BACC: 0.7952  — peso: 0.1662 (16.6%)
+    efficientnet_b3       Val BACC: 0.7975  — peso: 0.1667 (16.7%)
+    vit_b16               Val BACC: 0.8185  — peso: 0.1711 (17.1%)
+    dinov2_b              Val BACC: 0.8013  — peso: 0.1675 (16.8%)
+    biomedclip            Val BACC: 0.7734  — peso: 0.1617 (16.2%)
+✓ Ensemble Test BACC: 0.8266
+
+✓ Mejor modelo individual: vit_b16 (Val BACC=0.8185)
+
+===== TEST-TIME AUGMENTATION (test) =====
+  TTA individual (vit_b16, 10 rondas)...
+✓ TTA vit_b16 Test BACC (10 rondas): 0.7995
+
+  TTA ensemble (3 modelos × 10 rondas)...
+    resnet50 (peso 16.7%)...
+    densenet121 (peso 16.6%)...
+    efficientnet_b3 (peso 16.7%)...
+    vit_b16 (peso 17.1%)...
+    dinov2_b (peso 16.8%)...
+    biomedclip (peso 16.2%)...
+✓ TTA Ensemble Test BACC (10 rondas × 3 modelos): 0.8350
+
+  Comparativa TTA:
+    Ensemble sin TTA:         0.8266
+    TTA vit_b16 solo: 0.7995
+    TTA Ensemble:             0.8350
+    MEL sens (TTA argmax):    0.7165
+
+  TTA ensemble sobre val (10 rondas × 3 modelos)...
+
+===== CALIBRACIÓN DE UMBRALES CLÍNICOS (sobre val) =====
+  MEL: theta=0.282 | sens=0.8506 | spec=0.9212 | metodo=argmax-theta | floor=0.85
+  AKIEC: theta=0.322 | sens=0.7600 | spec=0.9951 | metodo=argmax-theta | floor=0.70
+
+===== COMPARATIVA FINAL (test) =====
+  TTA Ensemble (argmax):            BACC = 0.8350  MEL sens = 0.716  spec = 0.962
+  TTA Ensemble (umbrales clínicos): BACC = 0.8420  [theta_MEL=0.282  theta_AKIEC=0.322]
+  Delta BACC global: +0.0069
+  BACC malignas: Argmax=0.7749 → Umbrales=0.8181 (+0.0431)
+  Métricas por clase con umbrales:
+    MEL     sens=0.8199  spec=0.9267 <-- crítico
+    NV      sens=0.8992  spec=0.9288
+    BCC     sens=0.9200  spec=0.9883
+    AKIEC   sens=0.7143  spec=0.9960 <-- crítico
+    BKL     sens=0.8216  spec=0.9803
+    DF      sens=0.7188  spec=0.9983
+    VASC    sens=1.0000  spec=0.9991
+✓ results.json guardado
+
+---------------------------------------------------------------------------------
+                Modelo  Val BACC  Test BACC  Mejor epoch  Epochs totales   Tiempo
+---------------------------------------------------------------------------------
+              resnet50    0.7977     0.7881           34              35   58m 4s
+           densenet121    0.7952     0.7862           30              35   51m 0s
+       efficientnet_b3    0.7975     0.7940           11              21  57m 57s
+               vit_b16    0.8185     0.7955           18              28  147m 3s
+              dinov2_b    0.8013     0.7950           25              35 193m 17s
+            biomedclip    0.7734     0.7439           15              25 131m 27s
+              Ensemble         -     0.8266            -               -        -
+         TTA (vit_b16)         -     0.7995            -               -        -
+          TTA Ensemble         -     0.8350            -               -        -
+TTA + umbrales clinicos         -     0.8420            -θ_MEL=0.282  θ_AKIEC=0.322        -
+---------------------------------------------------------------------------------
+✓ Arrays guardados en Drive (disponibles para LOAD_TTA_FROM_DIR)
+
+✓ PDF generado: /kaggle/working/OUTPUTS/2026-07-31_21-40-20/resultados_tfg.pdf
+✓ Todos los outputs en: /kaggle/working/OUTPUTS/2026-07-31_21-40-20
+✓ ZIP creado: /kaggle/working/OUTPUTS/2026-07-31_21-40-20.zip  (1115.1 MB)

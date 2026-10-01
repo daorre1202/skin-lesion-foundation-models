@@ -1,0 +1,5 @@
+Ensemble,Modelos,Test BACC
+CNN (3 originales),"resnet50, densenet121, efficientnet_b3",0.8283
+Fundacionales (3 nuevos),"vit_b16, dinov2_b, biomedclip",0.837
+Todos,"resnet50, densenet121, efficientnet_b3, vit_b16, dinov2_b, biomedclip",0.8415
+Mejor subconjunto (val),"resnet50, vit_b16, dinov2_b",0.8379

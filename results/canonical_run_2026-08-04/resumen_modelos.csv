@@ -1,0 +1,11 @@
+Modelo,Val BACC,Test BACC,Mejor epoch,Epochs totales,Tiempo
+resnet50,0.7977,0.7881,34,35,58m 4s
+densenet121,0.7952,0.7862,30,35,51m 0s
+efficientnet_b3,0.7975,0.794,11,21,57m 57s
+vit_b16,0.8259,0.8009,8,18,87m 35s
+dinov2_b,0.8013,0.795,25,35,193m 17s
+biomedclip,0.7949,0.7882,31,35,170m 43s
+Ensemble,-,0.8371,-,-,-
+TTA (vit_b16),-,0.8011,-,-,-
+TTA Ensemble,-,0.8415,-,-,-
+TTA + umbrales clinicos,-,0.8499,-,θ_MEL=0.307  θ_AKIEC=0.386,-

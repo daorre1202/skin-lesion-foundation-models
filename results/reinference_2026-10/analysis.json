@@ -1,0 +1,169 @@
+{
+  "n_boot": 10000,
+  "seed": 42,
+  "per_model": {
+    "resnet50": {
+      "val_raw": 0.7981494977796908,
+      "val_tta": 0.8160778031755616,
+      "test_raw": 0.7880600879625614,
+      "test_tta": 0.7985825589227351
+    },
+    "densenet121": {
+      "val_raw": 0.7957588360099065,
+      "val_tta": 0.7950345823146956,
+      "test_raw": 0.7861977275208324,
+      "test_tta": 0.8048068676778497
+    },
+    "efficientnet_b3": {
+      "val_raw": 0.7973782951565221,
+      "val_tta": 0.8027937479682671,
+      "test_raw": 0.7939990099661406,
+      "test_tta": 0.8029230808073464
+    },
+    "vit_b16": {
+      "val_raw": 0.8259202837746258,
+      "val_tta": 0.8301867715584796,
+      "test_raw": 0.8009115749975917,
+      "test_tta": 0.8134356173396384
+    },
+    "dinov2_b": {
+      "val_raw": 0.801298266028096,
+      "val_tta": 0.812207169290833,
+      "test_raw": 0.7950251567747332,
+      "test_tta": 0.818966674498423
+    },
+    "biomedclip": {
+      "val_raw": 0.794889530144786,
+      "val_tta": 0.785854050105959,
+      "test_raw": 0.7882076746424937,
+      "test_tta": 0.7966039437270408
+    }
+  },
+  "point_bacc": {
+    "cnn_tta": 0.8294903075675853,
+    "foundation_tta": 0.8362640959991609,
+    "all_tta": 0.8426676479662258,
+    "all_raw": 0.8371328798943054,
+    "resnet50_raw": 0.7880600879625614,
+    "densenet121_raw": 0.7861977275208324,
+    "efficientnet_b3_raw": 0.7939990099661406,
+    "vit_b16_raw": 0.8009115749975917,
+    "dinov2_b_raw": 0.7950251567747332,
+    "biomedclip_raw": 0.7882076746424937,
+    "resnet50_tta": 0.7985825589227351,
+    "densenet121_tta": 0.8048068676778497,
+    "efficientnet_b3_tta": 0.8029230808073464,
+    "vit_b16_tta": 0.8134356173396384,
+    "dinov2_b_tta": 0.818966674498423,
+    "biomedclip_tta": 0.7966039437270408
+  },
+  "contrasts": {
+    "all_tta_minus_cnn_tta": {
+      "delta": 0.013177340398640491,
+      "ci_low": 0.0023013195585769725,
+      "ci_high": 0.024449948681108443,
+      "p_positive": 0.9917
+    },
+    "foundation_tta_minus_cnn_tta": {
+      "delta": 0.0067737884315755,
+      "ci_low": -0.016848479878669685,
+      "ci_high": 0.028782325730490145,
+      "p_positive": 0.723
+    },
+    "dinov2_tta_minus_raw": {
+      "delta": 0.023941517723689798,
+      "ci_low": 0.009481725886872513,
+      "ci_high": 0.03986377112626892,
+      "p_positive": 0.9996
+    },
+    "all_tta_minus_all_raw": {
+      "delta": 0.005534768071920437,
+      "ci_low": -0.009998942437398258,
+      "ci_high": 0.021299593142000847,
+      "p_positive": 0.7611
+    }
+  },
+  "subset_search": {
+    "best_subset": [
+      "resnet50",
+      "densenet121",
+      "vit_b16",
+      "dinov2_b",
+      "biomedclip"
+    ],
+    "best_val_bacc": 0.8661,
+    "best_test_bacc": 0.8323,
+    "gap": 0.0337,
+    "six_model_rank_on_val": 7,
+    "six_model_val_bacc": 0.859,
+    "six_model_test_bacc": 0.8415,
+    "n_subsets": 63,
+    "mean_gap_all_subsets": 0.0093,
+    "top5_by_val": [
+      {
+        "models": [
+          "resnet50",
+          "densenet121",
+          "vit_b16",
+          "dinov2_b",
+          "biomedclip"
+        ],
+        "n": 5,
+        "val_bacc": 0.8661,
+        "test_bacc": 0.8323
+      },
+      {
+        "models": [
+          "resnet50",
+          "vit_b16",
+          "dinov2_b"
+        ],
+        "n": 3,
+        "val_bacc": 0.864,
+        "test_bacc": 0.8546
+      },
+      {
+        "models": [
+          "resnet50",
+          "vit_b16",
+          "dinov2_b",
+          "biomedclip"
+        ],
+        "n": 4,
+        "val_bacc": 0.8633,
+        "test_bacc": 0.8408
+      },
+      {
+        "models": [
+          "densenet121",
+          "efficientnet_b3",
+          "vit_b16",
+          "dinov2_b",
+          "biomedclip"
+        ],
+        "n": 5,
+        "val_bacc": 0.8597,
+        "test_bacc": 0.8347
+      },
+      {
+        "models": [
+          "resnet50",
+          "efficientnet_b3",
+          "vit_b16",
+          "dinov2_b"
+        ],
+        "n": 4,
+        "val_bacc": 0.8595,
+        "test_bacc": 0.8581
+      }
+    ],
+    "uses_tta": {
+      "resnet50": true,
+      "densenet121": false,
+      "efficientnet_b3": true,
+      "vit_b16": true,
+      "dinov2_b": true,
+      "biomedclip": false
+    }
+  }
+}
